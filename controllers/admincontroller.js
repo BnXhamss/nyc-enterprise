@@ -1,11 +1,11 @@
-import { adminModel } from "../Models/adminmodels.js";
+import { adminModel } from "../models/adminmodels.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import {
   adminLoginValidator,
   adminRegisterValidator,
   updateAdminValidator,
-} from "../Validators/adminValidator.js";
+} from "../Validators/adminvalidator.js";
 
 //Register Admin
 export const registerAdmin = async (req, res, next) => {
@@ -39,10 +39,14 @@ export const registerAdmin = async (req, res, next) => {
   }
 };
 
-
-  // login Admin
+// login Admin
 export const adminLogin = async (req, res, next) => {
   try {
+    console.log(req.body); // Debugging: Log the request body
+    if (!req.body) {
+      return res.status(400).json({ message: "Request body is missing" });
+    }
+
     const { error, value } = adminLoginValidator.validate(req.body);
     if (error) {
       return res.status(422).json(error);
@@ -60,15 +64,12 @@ export const adminLogin = async (req, res, next) => {
       return res.status(401).json({ message: "Invalid Credential" });
     }
 
-    // Generate access token for admin
     const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET_KEY, {
       expiresIn: "24h",
     });
 
-    // Return response
     res.status(200).json({ token });
   } catch (err) {
-    // Log the error and send a 500 response
     console.error(err);
     res.status(500).json({ message: "Internal Server Error" });
   }

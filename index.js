@@ -1,10 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import adminRouter from './routes/adminroute.js';
+import adminRoutes from './routes/adminroute.js';
+import productRoutes from './routes/productRoutes.js';
 import dotenv from "dotenv";
 dotenv.config();
-
-
 
 // Make database connection
 await mongoose.connect(process.env.MONGO_URI).then(() =>{
@@ -13,16 +12,19 @@ await mongoose.connect(process.env.MONGO_URI).then(() =>{
    console.log(err)
 });
 
-
 // Create an Express app
 const app = express();
 
-// Use global middlewares
-app.use(express.json());
-app.use('/api/admin', adminRouter);
+// Middleware to parse JSON and URL-encoded data
+app.use(express.json()); // Parses incoming JSON requests
+app.use(express.urlencoded({ extended: true })); // Parses URL-encoded data
 
-// Listen for  incoming request 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
+// Use global middlewares
+app.use('/admin', adminRoutes);
+app.use('/products', productRoutes);
+
+// Listen for incoming request 
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });

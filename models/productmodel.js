@@ -8,16 +8,15 @@ const product = new Schema(
     description: { type: String, required: true },
     image: { type: String, required: true },
     quantity: { type: Number, required: true },
-    // category: {
-    //   type: String,
-    //   required: true,
-    //   enum: [
-    //     'Television & Accessories',
-    //     'Video Games',
-    //     'Computer Accessories',
-    //     'Audio Systems',
-    //   ],
-    // },
+    category: {
+      type: String,
+      required: true,
+      enum: [
+        'Wedding cake',
+        'birthday cake',
+        'Parties'
+      ],
+    },
     adminId: { type: Types.ObjectId, required: true, ref: "Admin" },
   },
   { timestamps: true }

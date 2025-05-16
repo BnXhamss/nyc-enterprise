@@ -1,23 +1,34 @@
-import { productModel } from "../Models/productModel.js";
+import { productModel } from "../models/productmodel.js";
 import {
   addProductDetails,
   replaceProductDetails,
-} from "../Validators/productValidator.js";
+} from "../validators/productvalidator.js";
 
 // Add new product
 export const addProduct = async (req, res, next) => {
   try {
+    console.log("Request Body:", req.body); // Debugging: Log the request body
+    console.log("File:", req.file); // Debugging: Log the uploaded file
+
     const { error, value } = addProductDetails.validate({
       ...req.body,
       image: req.file?.filename,
     });
+
     if (error) {
+      console.log("Validation Error:", error.details); // Log the validation error
       return res.status(422).json(error);
     }
+
+    if (!req.file) {
+      return res.status(400).json({ message: "Image is required" });
+    }
+
     await productModel.create(value);
     res.status(201).json({ message: "Product Added" });
   } catch (error) {
-    next(error);
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
