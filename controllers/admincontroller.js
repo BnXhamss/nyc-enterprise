@@ -5,7 +5,7 @@ import {
   adminLoginValidator,
   adminRegisterValidator,
   updateAdminValidator,
-} from "../Validators/adminvalidator.js";
+} from "../validators/adminvalidator.js";
 
 //Register Admin
 export const registerAdmin = async (req, res, next) => {
