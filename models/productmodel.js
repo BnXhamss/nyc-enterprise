@@ -7,17 +7,16 @@ const product = new Schema(
     price: { type: String, required: true },
     description: { type: String, required: true },
     image: { type: String, required: true },
-    quantity: { type: Number, required: true },
     category: {
       type: String,
       required: true,
       enum: [
-        'Wedding cake',
-        'birthday cake',
+        'Weddings',
+        'birthdays',
         'Parties'
       ],
     },
-    adminId: { type: Types.ObjectId, required: true, ref: "Admin" },
+    // adminId: { type: Types.ObjectId, required: true, ref: "Admin" },
   },
   { timestamps: true }
 );

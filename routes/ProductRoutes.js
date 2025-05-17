@@ -17,7 +17,7 @@ productsRouter.get("/", getAllProducts);
 
 productsRouter.get("/:id", getProductById);
 
-productsRouter.put("/:id", isAuthenticated, remoteUpload.single("image"), replaceProduct);
+productsRouter.patch("/:id", isAuthenticated, remoteUpload.single("image"), replaceProduct);
 
 productsRouter.delete("/:id", isAuthenticated, deleteProduct);
 

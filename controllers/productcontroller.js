@@ -58,32 +58,35 @@ export const getProductById = async (req, res, next) => {
 
 // Update a product
 export const replaceProduct = async (req, res, next) => {
-  // Validate incoming request (excluding image)
-  const { error } = replaceProductDetails.validate(req.body);
-  if (error) {
-    return res.status(400).json({ message: error.details[0].message });
-  }
+  try {
+    console.log("Request Body:", req.body); // Debugging: Log the request body
+    console.log("File:", req.file); // Debugging: Log the uploaded file
 
-  // Check if image was uploaded
-  if (!req.file) {
-    return res.status(400).json({ message: "Image is required" });
-  }
-
-  // Perform model replace operation
-  const results = await productModel.findOneAndReplace(
-    { _id: req.params.id },
-    {
+    const { error, value } = replaceProductDetails.validate({
       ...req.body,
-      image: req.file.filename,
-    },
-    { new: true }
-  );
+      image: req.file?.filename, // Use the uploaded image if provided
+    });
 
-  // Return a response
-  if (!results) {
-    return res.status(404).json({ message: "Product not found" });
+    if (error) {
+      console.log("Validation Error:", error.details); // Log the validation error
+      return res.status(422).json(error);
+    }
+
+    const updatedProduct = await productModel.findByIdAndUpdate(
+      req.params.id,
+      value,
+      { new: true }
+    );
+
+    if (!updatedProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({ message: "Product updated successfully", updatedProduct });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
-  res.status(200).json({ results });
 };
 
 // Delete a product

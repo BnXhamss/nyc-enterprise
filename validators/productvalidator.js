@@ -5,16 +5,16 @@ export const addProductDetails = Joi.object({
   price: Joi.string().required(), // Ensure price is a string
   description: Joi.string().required(),
   image: Joi.string().required(),
-  quantity: Joi.number().required(),
   category: Joi.string()
-    .valid("Wedding cake", "birthday cake", "Parties")
+    .valid("Weddings", "birthdays", "Parties")
     .required(),
-  adminId: Joi.string().required(), // Ensure adminId is provided
 });
 
 export const replaceProductDetails = Joi.object({
   name: Joi.string().required(),
   price: Joi.number().required(),
   description: Joi.string().required(),
-  quantity: Joi.number().integer().required(),
+  image: Joi.string().optional(), // Make the image field optional
 });
+
+// adminId: Joi.string().required(), // Ensure adminId is provided

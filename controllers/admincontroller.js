@@ -68,7 +68,7 @@ export const adminLogin = async (req, res, next) => {
       expiresIn: "24h",
     });
 
-    res.status(200).json({ token });
+    res.status(200).json({ message: "Login Successfully, Welcome Back" ,  token  });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal Server Error" });
