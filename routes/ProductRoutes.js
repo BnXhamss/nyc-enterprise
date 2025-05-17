@@ -5,7 +5,7 @@ import {
   getProductById,
   getAllProducts,
   replaceProduct,
-} from "../Controllers/productController.js";
+} from "../controllers/productcontroller.js";
 import { remoteUpload } from "../middlewares/upload.js";
 import { isAuthenticated, isAuthorized } from "../middlewares/auth.js";
 
