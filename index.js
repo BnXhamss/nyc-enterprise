@@ -1,8 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import adminRoutes from './routes/adminroute.js';
-import productRoutes from './routes/productRoutes.js';
+
 import dotenv from "dotenv";
+import productsRouter from './routes/ProductRoutes.js';
 dotenv.config();
 
 // Make database connection
@@ -21,7 +22,7 @@ app.use(express.urlencoded({ extended: true })); // Parses URL-encoded data
 
 // Use global middlewares
 app.use('/admin', adminRoutes);
-app.use('/products', productRoutes);
+app.use('/products', productsRouter );
 
 // Listen for incoming request 
 const PORT = process.env.PORT || 3000;
