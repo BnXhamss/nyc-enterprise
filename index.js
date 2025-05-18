@@ -4,6 +4,7 @@ import adminRoutes from './routes/adminroute.js';
 
 import dotenv from "dotenv";
 import productsRouter from './routes/ProductRoutes.js';
+import orderRouter from './routes/orderroutes.js';
 dotenv.config();
 
 // Make database connection
@@ -23,6 +24,9 @@ app.use(express.urlencoded({ extended: true })); // Parses URL-encoded data
 // Use global middlewares
 app.use('/admin', adminRoutes);
 app.use('/products', productsRouter );
+
+// Register order routes 
+app.use("/orders", orderRouter)
 
 // Listen for incoming request 
 const PORT = process.env.PORT || 3000;

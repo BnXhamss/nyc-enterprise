@@ -12,8 +12,7 @@ const product = new Schema(
       required: true,
       enum: [
         'Weddings',
-        'birthdays',
-        'Parties'
+        'birthdays'
       ],
     },
     // adminId: { type: Types.ObjectId, required: true, ref: "Admin" },

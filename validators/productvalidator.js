@@ -6,7 +6,7 @@ export const addProductDetails = Joi.object({
   description: Joi.string().required(),
   image: Joi.string().required(),
   category: Joi.string()
-    .valid("Weddings", "birthdays", "Parties")
+    .valid("Weddings", "birthdays")
     .required(),
 });
 
