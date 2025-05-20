@@ -22,3 +22,6 @@ productsRouter.patch("/:id", remoteUpload.single("image"), replaceProduct);
 productsRouter.delete("/:id", deleteProduct);
 
 export default productsRouter;
+
+
+// is Authenticated, addProduct, replaceProduct, deleteProduct
