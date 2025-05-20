@@ -8,7 +8,7 @@ import {
 export const addProduct = async (req, res, next) => {
   try {
     console.log("Request Body:", req.body); // Debugging: Log the request body
-    console.log("File:", req.file); // Debugging: Log the uploaded file
+    console.log("Uploaded File:", req.file); // Debugging: Log the uploaded file
 
     const { error, value } = addProductDetails.validate({
       ...req.body,
@@ -24,8 +24,8 @@ export const addProduct = async (req, res, next) => {
       return res.status(400).json({ message: "Image is required" });
     }
 
-    await productModel.create(value);
-    res.status(201).json({ message: "Product Added" });
+   const newProduct = await productModel.create(value);
+    res.status(201).json({ message: "Product added sucessfully", product: newProduct });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -60,7 +60,7 @@ export const getProductById = async (req, res, next) => {
 export const replaceProduct = async (req, res, next) => {
   try {
     console.log("Request Body:", req.body); // Debugging: Log the request body
-    console.log("File:", req.file); // Debugging: Log the uploaded file
+    console.log("Uploaded File:", req.file); // Debugging: Log the uploaded file
 
     const { error, value } = replaceProductDetails.validate({
       ...req.body,
