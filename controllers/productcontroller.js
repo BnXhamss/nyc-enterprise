@@ -12,7 +12,7 @@ export const addProduct = async (req, res, next) => {
 
     const { error, value } = addProductDetails.validate({
       ...req.body,
-      image: req.file?.filename,
+      image: req.file?.path, // Use the full Cloudinary URL
     });
 
     if (error) {
@@ -24,8 +24,8 @@ export const addProduct = async (req, res, next) => {
       return res.status(400).json({ message: "Image is required" });
     }
 
-   const newProduct = await productModel.create(value);
-    res.status(201).json({ message: "Product added sucessfully", product: newProduct });
+    const newProduct = await productModel.create(value);
+    res.status(201).json({ message: "Product added successfully", product: newProduct });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
