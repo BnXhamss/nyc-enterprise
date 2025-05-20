@@ -7,18 +7,18 @@ import {
   replaceProduct,
 } from "../controllers/productcontroller.js";
 import { remoteUpload } from "../middlewares/upload.js";
-import { isAuthenticated, isAuthorized } from "../middlewares/auth.js";
+import {  isAuthorized } from "../middlewares/auth.js";
 
 const productsRouter = Router();
 
-productsRouter.post("/", isAuthenticated, isAuthorized(['admin']), remoteUpload.single("image"), addProduct);
+productsRouter.post("/", isAuthorized(['admin']), remoteUpload.single("image"), addProduct);
 
 productsRouter.get("/", getAllProducts);
 
 productsRouter.get("/:id", getProductById);
 
-productsRouter.patch("/:id", isAuthenticated, remoteUpload.single("image"), replaceProduct);
+productsRouter.patch("/:id", remoteUpload.single("image"), replaceProduct);
 
-productsRouter.delete("/:id", isAuthenticated, deleteProduct);
+productsRouter.delete("/:id", deleteProduct);
 
 export default productsRouter;
