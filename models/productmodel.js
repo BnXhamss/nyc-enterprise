@@ -11,8 +11,8 @@ const product = new Schema(
       type: String,
       required: true,
       enum: [
-        'Weddings',
-        'birthdays'
+        'WEDDING',
+        'BIRTHDAY'
       ],
     },
     // adminId: { type: Types.ObjectId, required: true, ref: "Admin" },
