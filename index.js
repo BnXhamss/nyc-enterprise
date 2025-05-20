@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import mongoose from 'mongoose';
 import adminRoutes from './routes/adminroute.js';
 
@@ -16,6 +17,9 @@ await mongoose.connect(process.env.MONGO_URI).then(() =>{
 
 // Create an Express app
 const app = express();
+
+// enable cors
+app.use(cors());
 
 // Middleware to parse JSON and URL-encoded data
 app.use(express.json()); // Parses incoming JSON requests
