@@ -13,7 +13,7 @@ const productsRouter = Router();
 
 productsRouter.post("/", isAuthenticated, isAuthorized(['admin']), remoteUpload.single("image"), addProduct);
 
-productsRouter.get("/", getAllProducts);
+productsRouter.get("/allproducts", getAllProducts);
 
 productsRouter.get("/:id", getProductById);
 
