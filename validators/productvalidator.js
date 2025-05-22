@@ -9,11 +9,11 @@ export const addProductDetails = Joi.object({
 });
 
 export const replaceProductDetails = Joi.object({
-  name: Joi.string().required(),
-  price: Joi.number().required(),
-  description: Joi.string().required(),
+  name: Joi.string().optional(),
+  price: Joi.number().optional(),
+  description: Joi.string().optional(),
   image: Joi.string().optional(), // Make the image field optional
-  category: Joi.string().valid("Wedding", "Birthday").required(),
+  category: Joi.string().valid("Wedding", "Birthday").optional(),
 });
 
 // adminId: Joi.string().required(), // Ensure adminId is provided
