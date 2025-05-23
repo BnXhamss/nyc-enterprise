@@ -5,9 +5,9 @@ mongoose.set("strictPopulate", false);
 
 const orderSchema = new Schema(
     {
-    customersName: { type: String, required: true },
-    customersEmail: { type: String, required: true },
-    customersPhone: { type: String, required: true },
+    Name: { type: String, required: true },
+    Location: { type: String, required: true },
+    Phone: { type: String, required: true },
     OrderDescription: [ ]
 },
  { timestamps: true }

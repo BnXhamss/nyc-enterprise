@@ -1,8 +1,8 @@
 import Joi from "joi";
  
 export const createOrderValidator = Joi.object({
-    customersName: Joi.string().required(),
-    customersEmail: Joi.string().email().optional(),
-    customersPhone: Joi.string().required(),
+    Name: Joi.string().required(),
+    Location: Joi.string().required(),
+    Phone: Joi.string().required(),
     OrderDescription: Joi.array().items().required()
 });

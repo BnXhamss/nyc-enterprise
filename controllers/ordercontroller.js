@@ -43,3 +43,17 @@ export const getOrderById = async (req, res, next) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+// delete order
+export const deleteOrder = async (req, res, next) => {
+  try {
+    const order = await orderModel.findByIdAndDelete(req.params.id);
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+    res.status(200).json({ message: "Order deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
